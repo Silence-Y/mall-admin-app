@@ -16,6 +16,7 @@ export default new Vuex.Store({
     user: {
       username: 'Silence.Y',
       email: '1509023406@qq.com',
+      appkey: 'Silence_1613926006790',
       password: '123456',
       role: 'customer'
     },
