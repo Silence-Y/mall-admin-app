@@ -3,7 +3,7 @@
     <!-- 搜索 -->
     <search-box @submit="searchSubmit" :data="categoryList" />
     <a-button class="product-add-btn">
-      <router-link :to="{name: 'ProductAdd'}">添加商品</router-link>
+      <router-link :to="{ name: 'ProductAdd' }">添加商品</router-link>
     </a-button>
 
     <!-- 表格 -->
@@ -86,7 +86,7 @@ export default {
       this.getTableData();
     },
     // 编辑
-    editProduct(recode) {
+    editProduct(record) {
       this.$router.push({
         name: "ProductEdit",
         params: {
@@ -95,15 +95,15 @@ export default {
       });
     },
     // 删除
-    removeProduct(recode) {
+    removeProduct(record) {
       this.$confirm({
         title: "确认删除",
         content: () => (
           <div style="color:red;">{`确认删除标题为:${record.title}的商品吗`}</div>
         ),
         onOk: () => {
-          api.remove({ id: recode.id }).then(() => {
-            console.log(this);
+          api.remove({ id: record.id }).then(res => {
+            // console.log(this);
             this.getTableData();
           });
         },
