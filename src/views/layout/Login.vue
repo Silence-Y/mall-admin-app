@@ -60,8 +60,8 @@ export default {
     return {
       // 登录的表单信息
       loginForm: {
-        email: "1509023406@qq.com",
-        password: "123456"
+        email: "",
+        password: ""
       },
       //   检验规则
       rules: {
@@ -79,36 +79,25 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$router.push({
-            name: "Home"
-          });
+          api
+            .login(this.loginForm)
+            .then(res => {
+              console.log(res);
+              //   this.$store.dispatch('setUserInfo', res);
+              //   登录成功后跳转到home页面
+              this.$router.push({
+                name: "Home"
+              });
+            })
+            .catch(error => {
+              this.$message.error(error);
+            });
+          return true;
         }
-        // console.log("error submit!!");
-        // return false;
+        console.log("error submit!!");
+        return false;
       });
     },
-    // submitForm(formName) {
-    //   this.$refs[formName].validate(valid => {
-    //     if (valid) {
-    //       api
-    //         .login(this.loginForm)
-    //         .then(res => {
-    //           console.log(res);
-    //           //   this.$store.dispatch('setUserInfo', res);
-    //           //   登录成功后跳转到home页面
-    //           this.$router.push({
-    //             name: "Home"
-    //           });
-    //         })
-    //         .catch(error => {
-    //           this.$message.error(error);
-    //         });
-    //       return true;
-    //     }
-    //     console.log("error submit!!");
-    //     return false;
-    //   });
-    // },
 
     // 表单重置
     resetForm(formName) {

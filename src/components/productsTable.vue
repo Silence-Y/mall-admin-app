@@ -1,5 +1,5 @@
 <template>
-  <a-table :columns="columns" :pagination="page" @change="changePage">
+  <a-table :columns="columns" :data-source="tableData" :pagination="page" @change="changePage">
     <div slot="operation">
       <a-button>编辑</a-button>
       <a-button>删除</a-button>
@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import api from "@/api/product";
 const columns = [
   {
     title: "ID",
@@ -68,18 +67,27 @@ const columns = [
     scopedSlots: { customRender: "operation" }
   }
 ];
+
 export default {
   data() {
     return {
       columns
     };
   },
+  props: ["data", "page"],
+
+  computed: {
+    tableData() {
+      return this.data.map(item => ({
+        ...item,
+        key: item.id
+      }));
+    }
+  },
   methods: {
-    changePage() {}
+    changePage(page) {
+      this.$emit("change", page);
+    }
   }
 };
 </script>
-
-
-<style scoped>
-</style>

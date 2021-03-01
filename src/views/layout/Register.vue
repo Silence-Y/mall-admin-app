@@ -3,46 +3,27 @@
     <!-- 表单 -->
     <a-form-model
       class="login-form"
-      ref="registerForm"
-      :model="registerForm"
+      ref="loginForm"
+      :model="loginForm"
       :rules="rules"
       v-bind="layout"
     >
-      <a-form-model-item has-feedback label="用户名" prop="username">
-        <a-input v-model="registerForm.username" />
-      </a-form-model-item>
       <a-form-model-item has-feedback label="邮箱" prop="email">
-        <a-input v-model="registerForm.email" />
+        <a-input v-model="loginForm.email" />
       </a-form-model-item>
       <a-form-model-item has-feedback label="密码" prop="password">
         <a-input
-          v-model="registerForm.password"
+          v-model="loginForm.password"
           type="password"
           autocomplete="off"
         />
       </a-form-model-item>
-      <a-form-model-item has-feedback label="验证码" prop="code">
-        <a-input v-model="registerForm.code" />
-        <a-button type="primary" @click="getCode(registerForm.email)">
-          获取验证码
-        </a-button>
-      </a-form-model-item>
-      <a-form-model-item has-feedback label="角色" prop="role">
-        <a-radio-group v-model="registerForm.role">
-          <a-radio value="1">
-            customer
-          </a-radio>
-          <a-radio value="2">
-            admin
-          </a-radio>
-        </a-radio-group>
-      </a-form-model-item>
 
       <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
-        <a-button type="primary" @click="submitForm('registerForm')">
+        <a-button type="primary" @click="submitForm('loginForm')">
           提交
         </a-button>
-        <a-button style="margin-left: 10px" @click="resetForm('registerForm')">
+        <a-button style="margin-left: 10px" @click="resetForm('loginForm')">
           重置
         </a-button>
       </a-form-model-item>
@@ -78,17 +59,14 @@ export default {
 
     return {
       // 登录的表单信息
-      registerForm: {
-        username: "",
+      loginForm: {
         email: "",
-        password: "",
-        code: "",
-        role: ""
+        password: ""
       },
       //   检验规则
       rules: {
-        email: [{ validator: checkEmail, trigger: "change" }],
-        password: [{ validator: validatePass, trigger: "change" }]
+        pass: [{ validator: validatePass, trigger: "change" }],
+        email: [{ validator: checkEmail, trigger: "change" }]
       },
       layout: {
         labelCol: { span: 4 },
@@ -97,12 +75,6 @@ export default {
     };
   },
   methods: {
-    // 获取验证码
-    getCode(email) {
-      api.getCode(this.registerForm.email).then(res => {
-        console.log(res);
-      });
-    },
     //   表单提交
     submitForm(formName) {
       this.$refs[formName].validate(valid => {

@@ -1,18 +1,9 @@
 <template>
   <div class="search-box">
-    <a-form-model
-      layout="inline"
-      :model="searchForm"
-      @submit="handleSubmit"
-      @submit.native.prevent
-    >
+    <a-form-model layout="inline" :model="searchForm" @submit="handleSubmit" @submit.native.prevent>
       <a-form-model-item label="检索关键字">
-        <a-input
-          v-model="searchForm.searchWord"
-          placeholder="请输入关键字"
-        ></a-input>
+        <a-input v-model="searchForm.searchWord" placeholder="请输入关键字"></a-input>
       </a-form-model-item>
-      <!-- 商品类目 -->
       <a-form-model-item label="商品类目">
         <a-select
           show-search
@@ -21,9 +12,7 @@
           @change="handleChange"
           allowClear
         >
-          <a-select-option v-for="c in categoryList" :key="c.id" :value="c.id">
-            {{ c.name }}
-          </a-select-option>
+          <a-select-option v-for="c in data" :key="c.id" :value="c.id">{{c.name}}</a-select-option>
         </a-select>
       </a-form-model-item>
       <a-form-model-item>
@@ -34,30 +23,21 @@
 </template>
 
 <script>
-import api from "@/api/category";
 export default {
   data() {
     return {
       searchForm: {
         searchWord: "",
         category: ""
-      },
-      categoryList: []
+      }
     };
   },
-  created() {
-    api.list().then(res => {
-      //   console.log(res.data);
-      this.categoryList = res.data;
-    });
-  },
+  props: ["data"],
   methods: {
-    //   表单提交
+    // 子组件向父组件传递参数
     handleSubmit() {
-      // 子组件向父组件传递数据
       this.$emit("submit", this.searchForm);
     },
-    // 切换类目
     handleChange(val) {
       this.searchForm.category = val;
     }

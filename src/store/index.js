@@ -13,16 +13,16 @@ export default new Vuex.Store({
     // 用于切换菜单的闭合状态  false 代表不闭合  true代表闭合
     collapsed: false,
     // 存储用户信息,是一个对象
+    // user: getUserCookie(),
     user: {
       username: 'Silence.Y',
       email: '1509023406@qq.com',
-      appkey: 'Silence_1613926006790',
       password: '123456',
-      role: 'customer'
+      role: 'customer',
+      appkey: 'Silence_1613926006790'
     },
-    // user: getUserCookie(),
     // 存储菜单的路由
-    menuRoutes: []
+    menuRoutes: [],
   },
   // 提交变更，在有需要的时候调用
   mutations: {
@@ -32,7 +32,7 @@ export default new Vuex.Store({
 
     // 用户信息提交
     setUserInfo(state, userInfo) {
-      state.user = userInfo
+      state.user = userInfo;
     },
     // 退出
     logout(state) {
@@ -43,10 +43,9 @@ export default new Vuex.Store({
         email: '',
       };
     },
-    // 改变路由
     changeMenuRoutes(state, routes) {
       state.menuRoutes = routes;
-    },
+    }
   },
   // 提交mutation的方法
   actions: {
@@ -72,8 +71,8 @@ export default new Vuex.Store({
     changeMenuRoutes({
       commit
     }, routes) {
-      commit('changeMenuRoutes', routes)
-    }
+      commit('changeMenuRoutes', routes);
+    },
   },
-  modules: {}
-})
+  modules: {},
+});
