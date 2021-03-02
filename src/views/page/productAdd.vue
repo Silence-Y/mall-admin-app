@@ -5,12 +5,7 @@
     </a-steps>
     <div class="steps-content">
       <basic-info v-if="current === 0" @next="next" :form="form" />
-      <sale-info
-        v-else-if="current === 1"
-        @next="next"
-        @prev="prev"
-        :form="form"
-      />
+      <sale-info v-else-if="current === 1" @next="next" @prev="prev" :form="form" />
     </div>
   </div>
 </template>
@@ -19,12 +14,10 @@
 import BasicInfo from "@/components/basicDetail.vue";
 import SaleInfo from "@/components/saleDetail.vue";
 import api from "@/api/product";
-
 export default {
   data() {
     return {
       current: 0,
-      // 要提交的表单数据
       form: {
         title: "",
         desc: "",
@@ -51,23 +44,42 @@ export default {
     BasicInfo,
     SaleInfo
   },
+  // 回显数据
+  created() {
+    const { id } = this.$route.params;
+    if (id) {
+      api.detail(id).then(res => {
+        this.form = res;
+      });
+    }
+  },
   methods: {
     next(form) {
       this.form = {
         ...this.form,
         form
       };
-      // 代表没有下一步了
       if (this.current === 1) {
         // 提交数据
-        console.log(this.form);
-        api.add(this.form).then(res => {
-          console.log(res);
-          this.$message.success("新增成功");
-          this.$router.push({
-            name: "ProductList"
+        if (this.$route.params.id) {
+          // 编辑页面
+          api.edit(this.form).then(res => {
+            // console.log(res);
+            this.$message.success("修改成功");
+            this.$router.push({
+              name: "ProductList"
+            });
           });
-        });
+        } else {
+          // 新增页面
+          api.add(this.form).then(res => {
+            // console.log(res);
+            this.$message.success("新增成功");
+            this.$router.push({
+              name: "ProductList"
+            });
+          });
+        }
       } else {
         this.current++;
       }

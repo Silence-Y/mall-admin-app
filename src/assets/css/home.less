@@ -18,7 +18,7 @@
       margin-left: 80px;
     }
 
-    .main-header {
+    .slider-nav {
       height: 50px;
       line-height: 50px;
       border-bottom: 1px solid #eee;
@@ -31,9 +31,14 @@
       }
 
       .user-info {
+        // background-color: red;
         float: right;
-        text-align: center;
         cursor: pointer;
+        text-align: center;
+
+        li {
+          padding: 0 20px;
+        }
 
         li:not(:first-child) {
           display: none;
@@ -43,10 +48,6 @@
             color: #999;
             font-weight: 700;
           }
-        }
-
-        li {
-          padding: 0 20px;
         }
 
         &:hover {

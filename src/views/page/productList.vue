@@ -85,7 +85,7 @@ export default {
       this.page = page;
       this.getTableData();
     },
-    // 编辑
+    // 编辑，回显数据
     editProduct(record) {
       this.$router.push({
         name: "ProductEdit",
@@ -102,13 +102,13 @@ export default {
           <div style="color:red;">{`确认删除标题为:${record.title}的商品吗`}</div>
         ),
         onOk: () => {
-          api.remove({ id: record.id }).then(res => {
+          api.remove({ id: record.id }).then(() => {
             // console.log(this);
             this.getTableData();
           });
         },
         onCancel() {
-          console.log("Cancel");
+          // console.log("Cancel");
         },
         class: "confirm-box"
       });

@@ -22,6 +22,7 @@ export default {
       key: new Date().getTime()
     };
   },
+  // 菜单栏重新渲染
   watch: {
     $route() {
       this.key = new Date().getTime();
@@ -35,6 +36,6 @@ export default {
 };
 </script>
 
-<style  lang="less">
+<style lang="less">
 @import url("~@/assets/css/home.less");
 </style>

@@ -4,8 +4,8 @@
       ref="ruleForm"
       :model="form"
       :rules="rules"
-      :label-col="{ span: 5 }"
-      :wrapper-col="{ span: 13 }"
+      :label-col="{span: 5}"
+      :wrapper-col="{span: 13}"
     >
       <a-form-model-item label="商品售价" prop="price" required>
         <a-input v-model="form.price" />
@@ -21,10 +21,7 @@
       </a-form-model-item>
       <a-form-model-item label="商品相册" prop="images">
         <a-upload
-          :action="
-            'http://mallapi.duyiedu.com/upload/images?appkey=' +
-              $store.state.user.appkey
-          "
+          :action="'http://mallapi.duyiedu.com/upload/images?appkey=' + $store.state.user.appkey"
           list-type="picture-card"
           :file-list="fileList"
           @preview="handlePreview"
@@ -35,16 +32,12 @@
             <a-icon :type="loading ? 'loading' : 'plus'" />
             <div class="ant-upload-text">Upload</div>
           </div>
-          <a-modal
-            :visible="previewVisible"
-            :footer="null"
-            @cancel="handleCancel"
-          >
+          <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
             <img alt="example" style="width: 100%" :src="previewImage" />
           </a-modal>
         </a-upload>
       </a-form-model-item>
-      <a-form-model-item label class="next-btn" :wrapperCol="{ span: 24 }">
+      <a-form-model-item label class="next-btn" :wrapperCol="{span: 24}">
         <a-button type="default" @click="prev">上一步</a-button>
         <a-button type="primary" @click="next">提交</a-button>
       </a-form-model-item>
@@ -72,15 +65,26 @@ export default {
     };
   },
   props: ["form"],
+  created() {
+    // 回显图片信息
+    if (this.form.images.length > 0) {
+      this.fileList = this.form.images.map((item, index) => ({
+        uid: index,
+        name: `image-${index}.png`,
+        status: "done",
+        url: item
+      }));
+    }
+  },
   methods: {
-    // 改变
+    //
     handleChange({ file, fileList }) {
       console.log(file);
+      console.log(fileList);
       if (file.status === "done") {
         this.form.images.push(file.response.data.url);
-        // 删除图片时，移除掉url
+        console.log(this.form.images);
       } else if (file.status === "removed") {
-        const { url } = file.response.data;
         this.form.images = this.form.images.filter(item => item !== url);
       }
       this.fileList = fileList;
@@ -96,17 +100,19 @@ export default {
       });
     },
     prev() {
+      console.log("prev");
       this.$emit("prev");
     },
-    // 预览，将文件转为base64
+    // 图片预览
     async handlePreview(file) {
-      const obj = file;
+      console.log(file);
       if (!file.url && !file.preview) {
-        obj.preview = await getBase64(file.originFileObj);
+        file.preview = await getBase64(file.originFileObj);
       }
       this.previewImage = file.url || file.preview;
       this.previewVisible = true;
     },
+    // 删除图片
     handleCancel() {
       this.previewVisible = false;
     }

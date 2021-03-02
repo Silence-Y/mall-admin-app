@@ -11,7 +11,7 @@ const roleToRoute = {
       name: 'ProductAdd',
     },
     {
-      name: 'ProductEdit'
+      name:'ProductEdit'
     }
   ],
   admin: [{
@@ -24,7 +24,7 @@ const roleToRoute = {
       name: 'ProductAdd',
     },
     {
-      name: 'ProductEdit'
+      name:'ProductEdit'
     },
     {
       name: 'Category',

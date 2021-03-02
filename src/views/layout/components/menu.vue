@@ -31,6 +31,7 @@
 <script>
 export default {
   computed: {
+    // 默认选择的
     defaultSelectKey: {
       get() {
         return this.$router.currentRoute.matched[1]
@@ -38,6 +39,7 @@ export default {
           : "";
       }
     },
+    // 默认打开的
     defaultOpenKey: {
       get() {
         return this.$router.currentRoute.matched[0].name;
@@ -45,8 +47,9 @@ export default {
     }
   },
   watch: {
+    // 监听路由的变化
     $route() {
-      console.log(this.$router);
+      // console.log(this.$router);
     }
   },
   created() {

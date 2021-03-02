@@ -1,7 +1,7 @@
 <template>
-  <div class="main-header">
+  <div class="slider-nav">
     <!-- 按钮 -->
-    <a-button type="primary" style="margin-bottom: 16px" @click="toggleCollapsed">
+    <a-button type="primary" @click="toggleCollapsed">
       <a-icon :type="$store.state.collapsed ? 'menu-unfold' : 'menu-fold'" />
     </a-button>
 
@@ -20,7 +20,7 @@
     <ul class="user-info">
       <li class="user-name">
         <!-- 用户的登录信息 -->
-        {{ $store.state.user.username}}
+        {{$store.state.user.username}}
         <a-icon type="down" />
       </li>
       <li class="login-out" @click="logout">退出</li>

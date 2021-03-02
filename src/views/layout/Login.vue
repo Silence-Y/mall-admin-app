@@ -76,26 +76,35 @@ export default {
   },
   methods: {
     //   表单提交
+
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
+        // 表单提交
         if (valid) {
-          api
-            .login(this.loginForm)
-            .then(res => {
-              console.log(res);
-              //   this.$store.dispatch('setUserInfo', res);
-              //   登录成功后跳转到home页面
-              this.$router.push({
-                name: "Home"
-              });
-            })
-            .catch(error => {
-              this.$message.error(error);
-            });
-          return true;
+          this.$router.push({
+            name: "Home"
+          });
         }
-        console.log("error submit!!");
-        return false;
+
+        // 表单提交
+        // if (valid) {
+        //   api
+        //     .login(this.loginForm)
+        //     .then(res => {
+        //       console.log(res);
+        //       //   this.$store.dispatch('setUserInfo', res);
+        //       //   登录成功后跳转到home页面
+        //       this.$router.push({
+        //         name: "Home"
+        //       });
+        //     })
+        //     .catch(error => {
+        //       this.$message.error(error);
+        //     });
+        //   return true;
+        // }
+        // console.log("error submit!!");
+        // return false;
       });
     },
 
