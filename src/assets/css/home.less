@@ -1,7 +1,7 @@
 .home {
   .menu-list {
     width: 180px;
-    // 定位，不移动
+    // // 定位，不移动
     position: fixed;
     height: 100%;
 
@@ -31,7 +31,7 @@
       }
 
       .user-info {
-        // background-color: red;
+        z-index: 99;
         float: right;
         cursor: pointer;
         text-align: center;
@@ -42,6 +42,7 @@
 
         li:not(:first-child) {
           display: none;
+          background-color: #fff;
 
           &:hover {
             background-color: #eee;
