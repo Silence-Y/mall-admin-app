@@ -70,7 +70,7 @@ const routes = [{
       icon: 'home',
     },
     children: [{
-      path: 'index',
+      path: '/index',
       name: 'Index',
       meta: {
         title: '统计',
