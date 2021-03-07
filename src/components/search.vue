@@ -1,8 +1,16 @@
 <template>
   <div class="search-box">
-    <a-form-model layout="inline" :model="searchForm" @submit="handleSubmit" @submit.native.prevent>
+    <a-form-model
+      layout="inline"
+      :model="searchForm"
+      @submit="handleSubmit"
+      @submit.native.prevent
+    >
       <a-form-model-item label="检索关键字">
-        <a-input v-model="searchForm.searchWord" placeholder="请输入关键字"></a-input>
+        <a-input
+          v-model="searchForm.searchWord"
+          placeholder="请输入关键字"
+        ></a-input>
       </a-form-model-item>
       <a-form-model-item label="商品类目">
         <a-select
@@ -12,7 +20,9 @@
           @change="handleChange"
           allowClear
         >
-          <a-select-option v-for="c in data" :key="c.id" :value="c.id">{{c.name}}</a-select-option>
+          <a-select-option v-for="c in data" :key="c.id" :value="c.id">{{
+            c.name
+          }}</a-select-option>
         </a-select>
       </a-form-model-item>
       <a-form-model-item>
