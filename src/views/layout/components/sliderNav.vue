@@ -8,11 +8,13 @@
     <!-- 面包屑 -->
     <div class="breadcrumb">
       <a-breadcrumb v-if="currentRoute.length > 1">
-        <a-breadcrumb-item>{{currentRoute[0] ? currentRoute[0].meta.title: ''}}</a-breadcrumb-item>
+        <a-breadcrumb-item>{{
+          currentRoute[0] ? currentRoute[0].meta.title : ""
+        }}</a-breadcrumb-item>
         <a-breadcrumb-item>
-          <router-link
-            :to="{name: currentRoute[1].name}"
-          >{{currentRoute[1] ? currentRoute[1].meta.title: ''}}</router-link>
+          <router-link :to="{ name: currentRoute[1].name }">{{
+            currentRoute[1] ? currentRoute[1].meta.title : ""
+          }}</router-link>
         </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
@@ -20,7 +22,7 @@
     <ul class="user-info">
       <li class="user-name">
         <!-- 用户的登录信息 -->
-        {{$store.state.user.username}}
+        {{ $store.state.user.username }}
         <a-icon type="down" />
       </li>
       <li class="login-out" @click="logout">退出</li>
@@ -45,7 +47,7 @@ export default {
       this.$store.dispatch("changeCollapsed");
     },
     logout() {
-      this.$store.dispatch("logout");
+      // this.$store.dispatch("logout");
       this.$router.push({
         name: "Login"
       });

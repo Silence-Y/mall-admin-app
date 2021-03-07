@@ -63,7 +63,6 @@ const routes = [{
     name: 'Home',
     component: Home,
     redirect: '/index',
-    // redirect: '/login',
     meta: {
       title: '首页',
       hidden: false,
