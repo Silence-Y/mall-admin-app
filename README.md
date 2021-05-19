@@ -19,4 +19,3 @@ npm run build --report
 ```
 链接地址： https://silence-y.github.io/mall-admin-app/dist/index.html
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
